@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>滚动抽奖demo</title>
+    <style>
+        body,html{ height: 100%;}
+        body,html,div,p,ul,li{margin: 0;padding: 0;}
+        .rollbox{ 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            height: 300px;
+            background: pink;
+            overflow: hidden;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        .rollbox:before,.rollbox:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            background: #fff;
+        }
+        .rollbox:before{
+            top: 0;
+            background: -webkit-linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0));
+        }
+        .rollbox:after{
+            bottom: 0;
+            background: -webkit-linear-gradient(rgba(255,255,255,0),rgba(255,255,255,1));
+        }
+
+        .luckyBox{
+            width: 200px;
+            height: 100px;
+            position: relative;
+            margin-top:100px;
+            
+        }
+        .rolls{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .rolls li{
+            width: 100%;
+            height: 100%;
+            line-height: 100px;
+            list-style: none;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .controls{
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        .controls button{
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="rollbox" id="rollbox">
+        <div class="luckyBox">
+            <ul class="rolls" id="rolls">
+            </ul>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="stop">stop</button>
+        <button id="start">start</button>
+    </div>
+    
+    <script type="text/javascript" src="luckDraw.js"></script>
+    <script>
+        var lucky = new Lucky(document.getElementById('rolls'),[1,2,3,4,5,6],{
+            childHeight: 100,
+            end: function (item) {
+                alert('恭喜'+item+'号同学中奖');
+            }
+        });
+
+        document.getElementById('start').addEventListener('click',function () {
+            lucky.start();
+        });
+
+        document.getElementById('stop').addEventListener('click',function () {
+            lucky.stop();
+        });
+    </script>
+</body>
+</html>
