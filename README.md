@@ -3,7 +3,7 @@
 
 用原生js实现的一个滚动抽奖的插件  
 
-实际效果见 [demo](http://nekos.top/luckDraw)  
+实际效果见 [demo](http://nekos.top/LuckDraw/)  
 
 ---
 
